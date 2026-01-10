@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whisper-vtt2srt"
+version = "0.1.0"
+description = "A professional, robust library for converting WebVTT to SRT with advanced cleaning capabilities for AI-generated subtitles."
+readme = "README.md"
+authors = [
+    { name = "Jorcelino Junior", email = "jorcelino@live.com" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Multimedia :: Video",
+    "Topic :: Text Processing :: Filters",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jorcelinojunior/whisper-vtt2srt"
+"Bug Tracker" = "https://github.com/jorcelinojunior/whisper-vtt2srt/issues"
+
+[project.scripts]
+whisper-vtt2srt = "whisper_vtt2srt.main:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black",
+    "ruff",
+    "mypy"
+]
+docs = [
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.0",
+    "mkdocstrings[python]>=0.24"
+]
+[tool.setuptools]
+packages = ["whisper_vtt2srt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-ra -q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+exclude = ["_trash"]
+select = ["E", "F", "I", "N", "W", "B"]
+ignore = []

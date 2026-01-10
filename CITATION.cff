@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+title: whisper-vtt2srt
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+authors:
+  - given-names: Jorcelino
+    family-names: Junior
+    email: jorcelino@live.com
+repository-code: "https://github.com/jorcelinojunior/whisper-vtt2srt"
+url: "https://github.com/jorcelinojunior/whisper-vtt2srt"
+repository-artifact: "https://pypi.org/project/whisper-vtt2srt/"
+contact:
+  - email: jorcelino@live.com
+    given-names: Jorcelino
+    family-names: Junior
+abstract: >-
+  A professional, robust library for converting WebVTT to SRT
+  with advanced cleaning capabilities for AI-generated
+  subtitles.
+keywords:
+  - python
+  - subtitles
+  - vtt
+  - srt
+  - whisper
+  - ai
+  - converter
+  - multimedia
+license: MIT
+version: 0.1.0
+date-released: "2026-01-09"
