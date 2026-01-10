@@ -33,14 +33,13 @@ class TestKaraokeDeduplicator:
         cleaned = KaraokeDeduplicator().apply(blocks, options)
 
         # Expectation:
-        # 1. "Hello"
-        # 2. " world" (prefix "Hello" stripped)
-        # 3. "!" (prefix "Hello world" stripped)
-        # Note: The current logic strips the prefix from the NEXT block.
+        # Instead of fragments (Hello, world, !), we want the final stable line
+        # to subsume the prefixes and cover the entire time range (0 -> 3000).
 
-        assert cleaned[0].lines == ["Hello"]
-        assert cleaned[1].lines == ["world"] # "Hello " stripped
-        assert cleaned[2].lines == ["!"] # "Hello world" stripped, leaving "!"
+        assert len(cleaned) == 1
+        assert cleaned[0].lines == ["Hello world!"]
+        assert cleaned[0].start.milliseconds == 0
+        assert cleaned[0].end.milliseconds == 3000
 
 class TestGlitchFilter:
     def test_removes_short_blocks(self, make_block):

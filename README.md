@@ -115,6 +115,9 @@ services, pretty much every piece of
 * **🛡️ Stabilization Strategy**
    Intelligently detects and merges accumulating text blocks ("Karaoke Effect"), preventing the rapid flashing of partial sentences. Essential for generating smooth audio in TTS pipelines, video dubbing, and subtitles.
 
+* **🎵 Sound Description Removal**
+   Automatically filters out non-speech elements like `[Music]`, `[Applause]`, or `[Laughter]`, ensuring your TTS voice doesn't try to read stage directions.
+
 * **🧹 Glitch Filtering**
    Automatically removes subtitle blocks with insignificant duration (< 50ms) that can cause audio generation errors or player flickering.
 
@@ -175,6 +178,8 @@ options:
   -e ENCODING, --encoding ENCODING
                         Input file encoding (default: utf-8)
   --no-karaoke          Disable anti-karaoke filter (keep accumulating text)
+  --keep-sound-descriptions
+                        Keep sound descriptions like [Music] or [Applause]
   --keep-glitches       Keep short <50ms blocks
   --keep-formatting     Keep VTT tags (bold, italic, colors)
   --keep-metadata       Keep metadata tags (align:start, position:0%)
@@ -219,6 +224,7 @@ from whisper_vtt2srt import CleaningOptions, Pipeline
 # Configure strictness
 options = CleaningOptions(
     remove_pixelation=True,    # Fix Karaoke effect
+    remove_sound_descriptions=True, # Remove [Music], [Applause]
     remove_glitches=True,      # Remove <50ms blocks
     simplify_formatting=True,  # Strip tags like <c> or <b> and fix whitespace
     remove_metadata=True,      # Clean VTT positioning

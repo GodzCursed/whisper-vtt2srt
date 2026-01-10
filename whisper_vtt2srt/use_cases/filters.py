@@ -1,9 +1,16 @@
 import re
-from typing import List
+from typing import Dict, List, TypedDict
 
 from ..domain.interfaces import ContentFilter
-from ..domain.models import SubtitleBlock
+from ..domain.models import SubtitleBlock, TimeCode
 from ..domain.options import CleaningOptions
+
+
+class LineEvent(TypedDict):
+    """Internal representation of a line's timing for consolidation."""
+    text: str
+    start: int
+    end: int
 
 
 class ContentNormalizer(ContentFilter):
@@ -55,51 +62,108 @@ class KaraokeDeduplicator(ContentFilter):
         if not options.remove_pixelation:
             return blocks
 
-        cleaned_blocks = []
+        # 1. Explode blocks into individual line events
+        # Format: {'text': "Content", 'start': 1000, 'end': 2000}
+        line_events: List[LineEvent] = []
+        for block in blocks:
+            for line in block.lines:
+                clean_line = line.strip()
+                if clean_line:
+                    line_events.append({
+                        'text': clean_line,
+                        'start': block.start.milliseconds,
+                        'end': block.end.milliseconds
+                    })
 
-        # Cache original text to handle daisy-chain stripping (A -> AB -> ABC)
-        original_texts = [" ".join(b.lines).strip() for b in blocks]
+        if not line_events:
+            return []
 
-        for i in range(len(blocks)):
-            current = blocks[i]
+        # 2. Consolidate consecutive events for the same text
+        # We process events in order. If 'text' matches the last processed event
+        # and timing is contiguous (or overlapping), we merge them.
 
-            # If this is the last block, just add it
-            if i == len(blocks) - 1:
-                if any(current.lines):
-                    cleaned_blocks.append(current)
-                continue
+        # We need a way to look back at the 'active' entry for this specific text.
+        # But simply iterating and merging "same text" is enough if the VTT is sequential.
 
-            curr_text_raw = original_texts[i]
-            next_text_raw = original_texts[i+1]
 
-            # 1. Exact duplicate? Skip current.
-            if curr_text_raw == next_text_raw:
-                continue
+        # Helper to find if we can merge with the VERY LAST entry of this same text
+        # Ideally, we just check the list tip. But since we might have interleaved lines:
+        # Block 1: "A"
+        # Block 2: "A", "B"
+        # We will see events: (A, t1, t2), (A, t2, t3), (B, t2, t3).
+        # We want to merge the second A into the first A.
 
-            # 2. Current is prefix of Next? (Karaoke effect)
-            if next_text_raw.startswith(curr_text_raw) and curr_text_raw:
-                # Calculate what to keep in the NEXT block
-                # We strip the length of the current raw text from the next raw text
-                remainder = next_text_raw[len(curr_text_raw):].strip()
+        # We can track "open" lines by text content.
+        # But simple approach: Sort by Text then Start Time?
+        # No, duplicate lines might appear later (e.g. chorus in song) and shouldn't merge.
+        # We only merge if they are effectively adjacent in the original stream.
 
-                next_block = blocks[i+1]
-                if remainder:
-                    next_block.lines = [remainder]
-                else:
-                    next_block.lines = [] # Mark as empty
+        # Let's iterate original stream and maintain a "buffer" of active lines.
 
-            # Add current if not empty
-            if any(line.strip() for line in current.lines):
-                cleaned_blocks.append(current)
+        # Actually, simpler:
+        # Group by text? No.
+        # Just iterate. If we see "A" and we recently saw "A" and the gap is small (< 500ms?), merge.
 
-        # Re-index
-        final_blocks = []
-        for idx, block in enumerate(cleaned_blocks, 1):
-            if any(line.strip() for line in block.lines):
-                block.index = idx
-                final_blocks.append(block)
+        # Wait, using a map prevents "Chorus" (repeated lines later).
+        # We need a list of consolidated objects.
 
-        return final_blocks
+        final_list: List[LineEvent] = []
+
+        # Tracking the index of the last occurrence of each text in 'final_list'
+        last_seen_index: Dict[str, int] = {} # text -> index in final_list
+
+        tolerance_ms = 100 # Allow small gaps (e.g. 3.110 to 3.120 usually connects)
+
+        for event in line_events:
+            text = str(event['text'])
+            start = int(event['start'])
+            end = int(event['end'])
+
+            merged = False
+
+            # Check for EXACT match merge first (standard consolidation)
+            if text in last_seen_index:
+                idx = last_seen_index[text]
+                last_entry = final_list[idx]
+
+                if start <= last_entry['end'] + tolerance_ms:
+                    last_entry['end'] = max(last_entry['end'], end)
+                    merged = True
+
+            # If not merged, check if this is a "growth" of the LAST event in the stream
+            # e.g., "Hello" followed by "Hello world"
+            if not merged and final_list:
+                last_entry = final_list[-1]
+                # Only if they are contiguous/close
+                if start <= last_entry['end'] + tolerance_ms:
+                    if text.startswith(last_entry['text']):
+                        # This new event subsumes the previous one
+                        last_entry['text'] = text
+                        last_entry['end'] = max(last_entry['end'], end)
+                        # Update index map to point this new text to the same entry
+                        last_seen_index[text] = len(final_list) - 1
+                        merged = True
+
+            if not merged:
+                # Create new entry
+                new_entry: LineEvent = {'text': text, 'start': start, 'end': end}
+                final_list.append(new_entry)
+                last_seen_index[text] = len(final_list) - 1
+
+        # 3. Convert back to SubtitleBlocks
+        # Sort by start time for proper SRT ordering
+        final_list.sort(key=lambda x: (x['start'], x['end']))
+
+        new_blocks = []
+        for i, item in enumerate(final_list, 1):
+            new_blocks.append(SubtitleBlock(
+                index=i,
+                start=TimeCode(item['start']),
+                end=TimeCode(item['end']),
+                lines=[item['text']]
+            ))
+
+        return new_blocks
 
 class ShortLineMerger(ContentFilter):
     """Merges short lines within a block into valid single lines."""
@@ -129,3 +193,27 @@ class ShortLineMerger(ContentFilter):
             block.lines = merged_lines
 
         return blocks
+
+
+class SoundDescriptionFilter(ContentFilter):
+    """Removes sound descriptions like [Music], [Applause], etc."""
+
+    def apply(self, blocks: List[SubtitleBlock], options: CleaningOptions) -> List[SubtitleBlock]:
+        if not options.remove_sound_descriptions:
+            return blocks
+
+        filtered_blocks = []
+        for block in blocks:
+            new_lines = []
+            for line in block.lines:
+                # Remove content within square brackets [Music]
+                clean_line = re.sub(r'\[[^\]]+\]', '', line)
+                clean_line = clean_line.strip()
+                if clean_line:
+                    new_lines.append(clean_line)
+
+            if new_lines:
+                block.lines = new_lines
+                filtered_blocks.append(block)
+
+        return filtered_blocks

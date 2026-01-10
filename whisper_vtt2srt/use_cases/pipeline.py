@@ -3,7 +3,7 @@ from typing import Optional
 from ..adapters.parsers import VttParser
 from ..adapters.writers import SrtWriter
 from ..domain.options import CleaningOptions
-from .filters import ContentNormalizer, GlitchFilter, KaraokeDeduplicator, ShortLineMerger
+from .filters import ContentNormalizer, GlitchFilter, KaraokeDeduplicator, ShortLineMerger, SoundDescriptionFilter
 
 
 class Pipeline:
@@ -26,6 +26,7 @@ class Pipeline:
 
         # Register filters
         self.filters = [
+            SoundDescriptionFilter(),  # Clean sound descriptions first
             ContentNormalizer(),
             GlitchFilter(),
             KaraokeDeduplicator(),

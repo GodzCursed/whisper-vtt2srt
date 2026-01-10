@@ -16,10 +16,13 @@ class CleaningOptions:
             (e.g., `align:start position:0%`). Defaults to True.
         merge_short_lines (bool): If True, aggressively merges short lines into single lines.
             Defaults to False.
+        remove_sound_descriptions (bool): If True, removes typical sound descriptions
+            like `[Music]`, `[Applause]`, `[Laughter]`, etc. Defaults to True.
     """
     remove_pixelation: bool = True
     remove_glitches: bool = True
     simplify_formatting: bool = True
     remove_metadata: bool = True
     merge_short_lines: bool = False
+    remove_sound_descriptions: bool = True
     max_line_length: int = 42

@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Sound Description Removal**: Automatically filter out elements like `[Music]` or `[Applause]` for cleaner output.
+- **Stream Consolidation**: Improved `KaraokeDeduplicator` to intelligently merge prefix-based accumulating captions (Anti-Karaoke).
+- **CLI**: Added `--keep-sound-descriptions` to preserve non-speech descriptions if needed.
 - **Flat API**: Simplified import structure. Now you can import `Pipeline`, `CleaningOptions`, and `BatchConverter` directly from `whisper_vtt2srt`.
 - **Documentation**: Added "Before vs After" comparison in README to visually demonstrate cleaning capabilities.
 - **Documentation**: Added `CHANGELOG.md` to track project history.

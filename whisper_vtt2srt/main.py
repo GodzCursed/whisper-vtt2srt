@@ -34,6 +34,9 @@ def main():
                         default=True, help="Keep metadata tags (align:start, position:0%%)")
     parser.add_argument("--merge-short-lines", action="store_true", dest="merge_short_lines",
                         default=False, help="Aggressively merge short lines into single lines")
+    parser.add_argument("--keep-sound-descriptions", action="store_false", dest="remove_sound_descriptions",
+                        default=True,
+                        help="Keep sound descriptions like [Music], [Applause], [Laughter], etc.")
     parser.add_argument("--max-line-length", type=int, default=42,
                         help="Maximum line length allowed when merging short lines (default: 42)")
 
@@ -45,6 +48,7 @@ def main():
         simplify_formatting=args.simplify_formatting,
         remove_metadata=args.remove_metadata,
         merge_short_lines=args.merge_short_lines,
+        remove_sound_descriptions=args.remove_sound_descriptions,
         max_line_length=args.max_line_length
     )
 
