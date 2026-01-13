@@ -30,7 +30,6 @@ env/
 .env/
 
 # IDE / Editor
-.vscode/
 .idea/
 
 # Testing / Code Quality

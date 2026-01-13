@@ -52,9 +52,13 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.betterem
+  - pymdownx.highlight
+
 
 nav:
   - Home: index.md
+  - Playground 🚀: playground.md
   - API Reference:
       - Pipeline: api/pipeline.md
       - Batch Processing: api/batch.md
@@ -63,3 +67,6 @@ nav:
   - Contributing: contributing.md
   - Release Guide: release_guide.md
   - Code of Conduct: CODE_OF_CONDUCT.md
+
+extra_css:
+  - static/extra.css

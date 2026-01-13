@@ -29,7 +29,7 @@ clean:
 
 # Documentation
 docs-serve:
-	$(BIN)mkdocs serve
+	$(BIN)mkdocs serve --livereload
 
 docs-build:
 	$(BIN)mkdocs build
