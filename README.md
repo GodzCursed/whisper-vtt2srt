@@ -1,12 +1,4 @@
-<p align="right">
-  <a href="https://www.buymeacoffee.com/jorcelinojunior" target="_blank">
-    <img
-      src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-      alt="Buy Me A Coffee"
-      width="120"
-    />
-  </a>
-</p>
+<p align="right"><a href="https://www.buymeacoffee.com/jorcelinojunior" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="110" /></a></p>
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/jorcelinojunior/whisper-vtt2srt/main/docs/img/icon.png" alt="whisper-vtt2srt Icon" width="128" />
@@ -23,7 +15,7 @@
 </p>
 
 <p align="center">
-   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a> <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python 3.10+" /></a> <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style: Black" /></a> <a href="CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a> <a href="https://github.com/jorcelinojunior/whisper-vtt2srt/issues"><img alt="Issues" src="https://img.shields.io/github/issues/jorcelinojunior/whisper-vtt2srt" /></a> <a href="https://badge.fury.io/py/whisper-vtt2srt"><img src="https://badge.fury.io/py/whisper-vtt2srt.svg" alt="PyPI version" /></a>
+  <a href="https://www.buymeacoffee.com/jorcelinojunior" target="_blank"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-yellow" alt="Buy Me a Coffee" /></a> <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python 3.10+" /></a> <a href="CONTRIBUTING.md"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a> <a href="https://github.com/jorcelinojunior/whisper-vtt2srt/issues"><img alt="Issues" src="https://img.shields.io/github/issues/jorcelinojunior/whisper-vtt2srt" /></a> <a href="https://badge.fury.io/py/whisper-vtt2srt"><img src="https://badge.fury.io/py/whisper-vtt2srt.svg" alt="PyPI version" /></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
 </p>
 
 ---
@@ -41,8 +33,28 @@ It stabilizes and normalizes the text, making it safe for **Text-to-Speech (TTS)
 
 ---
 
+<h3 align="center">🚀 Try it Online</h3>
+<p align="center">Test the conversion instantly in your browser (Client-Side / Secure). No installation required.</p>
+
+<p align="center">
+  <a href="https://jorcelinojunior.github.io/whisper-vtt2srt/static/playground.html">
+    <img src="https://img.shields.io/badge/Open_Playground-4F46E5?style=for-the-badge&logo=python&logoColor=white" alt="whisper-vtt2srt | Open Playground" />
+  </a>
+</p>
+
+<br/>
+
+<p align="center">
+  <a href="https://jorcelinojunior.github.io/whisper-vtt2srt/static/playground.html">
+    <img src="https://raw.githubusercontent.com/jorcelinojunior/whisper-vtt2srt/main/docs/img/playground-preview.gif" alt="whisper-vtt2srt | Playground Preview" width="920"/>
+  </a>
+</p>
+
+---
+
 ## 📖 Table of Contents
 
+* [🎮 Online Playground](#-try-it-online)
 * [👀 See the Difference](#-see-the-difference-before-vs-after)
 * [🚀 Key Features](#-key-features)
 * [📦 Installation](#-installation)
@@ -109,15 +121,15 @@ services, pretty much every piece of
 
 ```srt
 1
-00:00:00,640 --> 00:00:05,430
+00:00:00,640 --> 00:00:03,110
 APIs are everywhere. They power your
 
 2
-00:00:03,120 --> 00:00:07,829
+00:00:03,120 --> 00:00:05,430
 apps, your payment systems, your cloud
 
 3
-00:00:05,440 --> 00:00:10,470
+00:00:05,440 --> 00:00:07,829
 services, pretty much every piece of
 ```
 
@@ -287,6 +299,6 @@ If you use this library in your research or project, please cite it as:
   <p><strong>Saved you time? Helped your project?</strong></p>
   <p>Support independent open-source development!</p>
   <a href="https://www.buymeacoffee.com/jorcelinojunior">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="150">
   </a>
 </div>
