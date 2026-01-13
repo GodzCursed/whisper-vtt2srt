@@ -4,8 +4,12 @@ from whisper_vtt2srt.domain.options import CleaningOptions
 from whisper_vtt2srt.use_cases.pipeline import Pipeline
 
 
-def test_reproduce_quality_issue():
-    # Load the VTT content provided by the user (simulated here)
+def test_pipeline_produces_clean_output_without_timestamp_overlap():
+    """Tests that the pipeline produces clean output with preserved timestamps.
+
+    This test validates the core goal: duplicates are removed, timestamps are
+    preserved exactly as in the source, and no timestamp overlap occurs.
+    """
     vtt_content = """WEBVTT
 Kind: captions
 Language: en
@@ -31,10 +35,6 @@ apps, your payment systems, your cloud
 services,<00:00:06.560><c> pretty</c><00:00:06.879><c> much</c><00:00:07.120><c> every</c><00:00:07.440><c> piece</c><00:00:07.680><c> of</c>
 """
 
-    # Ideal output lines (approximate based on analysis)
-    # Line 1: 00:00:00,640 --> 00:00:05,430 | APIs are everywhere...
-    # Line 2: 00:00:03,120 --> 00:00:07,829 | apps, your payment...
-
     options = CleaningOptions(
         remove_pixelation=True,
         remove_glitches=True,
@@ -47,16 +47,19 @@ services,<00:00:06.560><c> pretty</c><00:00:06.879><c> much</c><00:00:07.120><c>
     print("\nGenerated SRT:\n")
     print(srt_output)
 
-    # Basic assertions to check if merging happened
-    # We expect FEWER blocks than the input (which has 5 blocks)
-    # Ideally 2 blocks in this snippet.
-
+    # Parse output blocks
     blocks = srt_output.strip().split("\n\n")
-    assert len(blocks) <= 3, f"Expected compaction, got {len(blocks)} blocks"
 
-    # Check if Line 1 has the extended duration
-    assert "00:00:00,640" in blocks[0]
-    assert "00:00:05,430" in blocks[0]
+    # After glitch removal and deduplication, we expect exactly 3 blocks:
+    # Block 1: APIs are everywhere. They power your (00:00:00,640 --> 00:00:03,110)
+    # Block 2: apps, your payment systems, your cloud (00:00:03,120 --> 00:00:05,430)
+    # Block 3: services, pretty much every piece of (00:00:05,440 --> 00:00:07,829)
+    assert len(blocks) == 3, f"Expected 3 blocks, got {len(blocks)} blocks"
+
+    # Verify timestamps are preserved exactly (no overlap/extension)
+    assert "00:00:00,640 --> 00:00:03,110" in blocks[0]
+    assert "00:00:03,120 --> 00:00:05,430" in blocks[1]
+    assert "00:00:05,440 --> 00:00:07,829" in blocks[2]
 
 
 def test_sound_description_removal():
