@@ -1,0 +1,112 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    // ─────────────────────────────────────────────────────────────────────────
+    // CLI Debug Configurations
+    // ─────────────────────────────────────────────────────────────────────────
+    {
+      "name": "CLI: Convert Sample VTT",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "whisper_vtt2srt",
+      "args": ["tests/fixtures/sample.vtt"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "CLI: Convert Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "whisper_vtt2srt",
+      "args": ["${file}"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "CLI: Batch Convert Directory",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "whisper_vtt2srt",
+      "args": ["${input:inputPath}", "--recursive"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "CLI: Custom Arguments",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "whisper_vtt2srt",
+      "args": "${input:cliArgs}",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    // ─────────────────────────────────────────────────────────────────────────
+    // Test Configurations
+    // ─────────────────────────────────────────────────────────────────────────
+    {
+      "name": "Tests: Run All",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["tests/", "-v", "--tb=short"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "Tests: Run Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["${file}", "-v", "--tb=long"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    {
+      "name": "Tests: Run with Coverage",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/",
+        "-v",
+        "--cov=whisper_vtt2srt",
+        "--cov-report=term-missing"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    },
+    // ─────────────────────────────────────────────────────────────────────────
+    // Python API Debug (for library users)
+    // ─────────────────────────────────────────────────────────────────────────
+    {
+      "name": "API: Debug Pipeline",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/examples/basic_usage.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false
+    }
+  ],
+  "inputs": [
+    {
+      "id": "inputPath",
+      "type": "promptString",
+      "description": "Path to VTT file or directory to convert",
+      "default": "tests/fixtures/"
+    },
+    {
+      "id": "cliArgs",
+      "type": "promptString",
+      "description": "CLI arguments (e.g., input.vtt output.srt --no-karaoke)",
+      "default": "tests/fixtures/sample.vtt"
+    }
+  ]
+}
