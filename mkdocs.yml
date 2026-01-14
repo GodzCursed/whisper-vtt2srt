@@ -70,3 +70,10 @@ nav:
 
 extra_css:
   - static/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/jorcelinojunior
+    - icon: fontawesome/solid/mug-hot
+      link: https://buymeacoffee.com/jorcelinojunior

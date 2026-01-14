@@ -250,13 +250,13 @@ from whisper_vtt2srt import CleaningOptions, Pipeline
 
 # Configure strictness
 options = CleaningOptions(
-    remove_pixelation=True,    # Fix Karaoke effect
+    remove_pixelation=True,         # Fix Karaoke effect
     remove_sound_descriptions=True, # Remove [Music], [Applause]
-    remove_glitches=True,      # Remove <50ms blocks
-    simplify_formatting=True,  # Strip tags like <c> or <b> and fix whitespace
-    remove_metadata=True,      # Clean VTT positioning
-    merge_short_lines=False,   # Aggressively merge short lines
-    max_line_length=42         # Max length constraint for merging
+    remove_glitches=True,           # Remove <50ms blocks
+    simplify_formatting=True,       # Strip tags like <c> or <b> and fix whitespace
+    remove_metadata=True,           # Clean VTT positioning
+    merge_short_lines=False,        # Aggressively merge short lines
+    max_line_length=42              # Max length constraint for merging
 )
 
 pipeline = Pipeline(options)
